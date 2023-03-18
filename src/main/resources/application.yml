@@ -12,11 +12,12 @@ spring:
 #    host: 192.168.141.128
 #    port: 6379
 #    password: 264979
+#    timeout: 3000  连接超时时间 单位毫秒
 #    lettuce:
 #      pool:
-#        max-active: 10
-#        max-idle: 10
-#        min-idle: 1
+#        max-active: 10   #连接池最大可以被分配成jedis或者lettuce实例的个数
+#        max-idle: 10    #最大空闲连接
+#        min-idle: 1    #最小空闲连接
 #        time-between-eviction-runs: 10s
   jackson:
     default-property-inclusion: non_null # JSON?????????

@@ -10,6 +10,7 @@ import com.Covidtest.entity.Users;
  * @since 2023-03-13 22:13:22
  */
 public interface UsersDao extends BaseMapper<Users> {
+    //此处的功能在参考资料里是使用了redis，功能和原理未知
 
 }
 

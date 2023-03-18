@@ -13,6 +13,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * 此类是操作redis的工具类
  * csdn作者:大鱼等于负
+ * 作用：用redisTemplate作为媒介，提供方法操作redis中的数据，以提供redis服务
+ * 使用方法（推测）：在需要操作redis的类中声明类名并@Autowired，
+ * 在所用能用到redisTemplate的中都能用到
  */
 @Component
 public final class RedisUtils {

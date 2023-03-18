@@ -15,5 +15,20 @@ import org.springframework.stereotype.Service;
 @Service("usersService")
 public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements UsersService {
 
+
+    /**
+     * 描述：用于在登陆时没有对应用户而创建新用户的工具私有方法
+     * @param id
+     * @return user
+     */
+    private Users createUserWithID(String id){
+        //1.创建用户
+        Users user =new Users();
+        //2.设置用户的身份证号
+        user.setId(id);
+        //3.保存用户
+        save(user);
+        return user;
+    }
 }
 
