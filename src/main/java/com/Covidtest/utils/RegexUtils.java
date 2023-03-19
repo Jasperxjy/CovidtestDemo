@@ -16,6 +16,13 @@ public class RegexUtils {
         return mismatch(phone, RegexPatterns.PHONE_REGEX);
     }
 
+    /**
+     * 是否是无效身份证格式
+     * @param ID 要校验的身份证号
+     * @return true:符合，false：不符合
+     */
+    public static boolean isIDInvalid(String ID){return  mismatch(ID,RegexPatterns.USER_ID_REGEX);}
+
     // 校验是否不符合正则格式
     private static boolean mismatch(String str, String regex){
         if (StrUtil.isBlank(str)) {

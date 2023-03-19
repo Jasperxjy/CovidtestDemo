@@ -16,7 +16,7 @@ public class Users extends Model<Users> {
     //用户身份证
     private String id;
     //用户电话
-    private Integer phonenum;
+    private String phonenum;
     //用户口罩人脸特征向量
     private byte[] faceinfoMask;
     //用户人脸特征向量
@@ -41,11 +41,11 @@ public class Users extends Model<Users> {
         this.id = id;
     }
 
-    public Integer getPhonenum() {
+    public String getPhonenum() {
         return phonenum;
     }
 
-    public void setPhonenum(Integer phonenum) {
+    public void setPhonenum(String phonenum) {
         this.phonenum = phonenum;
     }
 
@@ -82,5 +82,6 @@ public class Users extends Model<Users> {
     public Serializable pkVal() {
         return this.id;
     }
-    }
+
+}
 
