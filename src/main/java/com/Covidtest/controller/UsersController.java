@@ -1,14 +1,14 @@
 package com.Covidtest.controller;
 
 import com.Covidtest.dto.Result;
+import com.Covidtest.dto.UserDTO;
 import com.Covidtest.dto.UserLoginFormDTO;
 import com.Covidtest.dto.UserSignFormDTO;
+import com.Covidtest.entity.Users;
 import com.Covidtest.service.UsersService;
+import com.Covidtest.utils.UserHolder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -50,6 +50,17 @@ public class UsersController {
     public Result sign_In(@RequestBody UserSignFormDTO signForm,HttpSession session){
         //TODO 实现注册功能
         return usersService.sign_In(signForm,session);
+    }
+
+    /**
+     * 获取当前登录用户对象信息
+     * @return 当前登录用户对象
+     */
+    @GetMapping ("/me")
+    public Result me(){
+        //获取当前登录用户并返回
+        UserDTO user = UserHolder.getUser();
+        return Result.ok(user);
     }
 
 

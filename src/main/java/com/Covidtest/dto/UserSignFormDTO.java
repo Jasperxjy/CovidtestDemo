@@ -2,6 +2,10 @@ package com.Covidtest.dto;
 
 import lombok.Data;
 
+/**
+ * @author 熊
+ * 作用：存储来自前端传入的json信息，用于保存注册信息
+ */
 @Data
 public class UserSignFormDTO {
     //存储姓名
