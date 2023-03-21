@@ -89,8 +89,51 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
 
     @Override
     public Result sign_In(UserSignFormDTO signForm, HttpSession session) {
+
         //TODO 实现注册功能
-        return null;
+        //取得各个数据
+        String id = signForm.getId();
+        String name = signForm.getUsername();
+        String passwd_1 = signForm.getPassword_1();
+        String passwd_2 = signForm.getPassword_2();
+        String phone = signForm.getPhone();
+        //判断名字、身份证、密码、确认密码是否都有
+        if(id==null||name==null||passwd_1==null||passwd_2==null){
+        //否，返回错误信息
+            return Result.fail("必要信息不全，请重新输入");
+        }
+        //判断密码与确认密码是否相同
+        if(!passwd_1.equals(passwd_2)) {
+            //否，返回错误信息
+            return Result.fail("两次输入密码不一致，请重新输入");
+        }
+        //判断身份证是否符合格式
+        if(RegexUtils.isIDInvalid(id)) {
+            //否，返回错误信息
+            return Result.fail("输入的身份证格式错误，请重新输入");
+        }
+        //如果手机号有，判断是否符合格式
+        if(phone!=null&&RegexUtils.isPhoneInvalid(phone)){
+            //否，返回错误信息
+            return  Result.fail("输入的手机号格式有误，请重新输入");
+        }
+        Users user= query().eq("id", id).one();
+        //判断身份证号是否没有注册
+        if(user!=null) {
+            //否，返回错误信息
+            return Result.fail("该用户已经注册");
+        }
+        //保存各个信息
+        Users newuser = new Users();
+        newuser.setId(id);
+        newuser.setUsername(name);
+        newuser.setPassword(passwd_1);
+        if(phone!=null){
+            newuser.setPhonenum(phone);
+        }
+        save(newuser);
+        //返回注册成功
+        return Result.ok();
     }
 }
 
