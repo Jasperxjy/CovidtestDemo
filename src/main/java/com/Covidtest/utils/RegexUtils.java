@@ -10,7 +10,7 @@ public class RegexUtils {
     /**
      * 是否是无效手机格式
      * @param phone 要校验的手机号
-     * @return true:符合，false：不符合
+     * @return true:无效，false：有效
      */
     public static boolean isPhoneInvalid(String phone){
         return mismatch(phone, RegexPatterns.PHONE_REGEX);
@@ -19,9 +19,20 @@ public class RegexUtils {
     /**
      * 是否是无效身份证格式
      * @param ID 要校验的身份证号
-     * @return true:符合，false：不符合
+     * @return true:无效，false：有效
      */
     public static boolean isIDInvalid(String ID){return  mismatch(ID,RegexPatterns.USER_ID_REGEX);}
+
+    /**
+     * 是否是无效的时间戳
+     * @param Timestamp 要校验的时间戳格式
+     * @return true: 无效，false：有效
+     */
+    public  static  boolean isTimestampInvalid(String Timestamp){
+        return (mismatch(Timestamp,RegexPatterns.TIMESTAMP_REGEX_1)
+                &&mismatch(Timestamp,RegexPatterns.TIMESTAMP_REGEX_2)
+                &&mismatch(Timestamp,RegexPatterns.TIMESTAMP_REGEX_3));
+    }
 
     // 校验是否不符合正则格式
     private static boolean mismatch(String str, String regex){

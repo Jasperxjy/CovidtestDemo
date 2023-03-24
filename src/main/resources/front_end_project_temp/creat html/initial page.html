@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Covid Test</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body >
+    <header>
+        <h1>Covid Test</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+ 
+    </header>
+    <main>
+        <div class="container">
+            <div class="form-wrapper">
+			<img src="xiao.jpeg" width="300" height="160"/>	
+                <h2>Register</h2>
+                <form id="register-form">
+                    <div clas="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="text" id="id" name="id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phonenum">Phone Number</label>
+                        <input type="text" id="phonenum" name="phonenum" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
+                <div id="register-result" class="result"></div>
+            </div>
+	
+            <div class="form-wrapper">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-id">ID</label>
+                        <input type="text" id="login-id" name="login-id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="login-password" required>
+                    </div>
+                    <button type="submit">Login</button>
+					<img src="zhongli.jpeg" width="300" height="400"/>	
+                </form>
+                <div id="login-result" class="result"></div>
+            </div>
+        </div>
+		 
+    </main>
+<script src="myScript.js"></script>
+    <footer>
+        <p>&copy; 2023 Covid Test</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

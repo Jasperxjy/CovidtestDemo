@@ -32,4 +32,13 @@ public abstract class RegexPatterns {
      * 最后一位是校验码，可以是数字 0-9，也可以是字母 X 或 x，用于验证身份证号码的正确性。
      */
     public static final String USER_ID_REGEX = "^[1-9]\\d{5}(18|19|20)\\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])\\d{3}[0-9Xx]$";
+    /**
+     * 三个时间戳正则
+     * 格式为yyyy_mm_dd hh:mm:ss
+     *      yyyy-mm-dd hh:mm:ss
+     *      yyyy.mm.dd hh:mm:ss
+     */
+    public  static final  String TIMESTAMP_REGEX_1 = "\\d{4}_\\d{2}_\\d{2}\\s\\d{2}:\\d{2}:\\d{2}";
+    public  static final  String TIMESTAMP_REGEX_2 = "\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}";
+    public  static final  String TIMESTAMP_REGEX_3 = "\\d{4}.\\d{2}.\\d{2}\\s\\d{2}:\\d{2}:\\d{2}";
 }
