@@ -19,6 +19,7 @@ public interface RegisterService extends IService<Register> {
 
     Result refresh(GetOrderDTO getOrderDTO, HttpSession session);
 
+
     Result neworder(Register register, HttpSession session);
 }
 

@@ -1,8 +1,10 @@
 package com.Covidtest.entity;
 
-import java.util.Date;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 核酸登记表(Register)表实体类
@@ -19,7 +21,8 @@ public class Register extends Model<Register> {
     //核酸单号
     private String naid;
     //采样时间
-    private Date registime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime registime;
     //管号
     private String groupT;
 
@@ -48,11 +51,11 @@ public class Register extends Model<Register> {
         this.naid = naid;
     }
 
-    public Date getRegistime() {
+    public LocalDateTime getRegistime() {
         return registime;
     }
 
-    public void setRegistime(Date registime) {
+    public void setRegistime(LocalDateTime registime) {
         this.registime = registime;
     }
 
@@ -73,5 +76,6 @@ public class Register extends Model<Register> {
     public Serializable pkVal() {
         return this.naid;
     }
+
     }
 

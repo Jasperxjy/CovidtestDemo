@@ -7,14 +7,12 @@ import java.io.Serializable;
  * (Employees)表实体类
  *
  * @author makejava
- * @since 2023-03-13 22:08:31
+ * @since 2023-03-26 12:55:35
  */
 @SuppressWarnings("serial")
 public class Employees extends Model<Employees> {
     //扫脸平台登录账号
     private String employeeid;
-    //登录状态
-    private String status;
     //登录密码
     private String password;
     //匹配机号
@@ -29,14 +27,6 @@ public class Employees extends Model<Employees> {
 
     public void setEmployeeid(String employeeid) {
         this.employeeid = employeeid;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getPassword() {

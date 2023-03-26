@@ -21,7 +21,14 @@ public class MvcConfig implements WebMvcConfigurer {
                         //指定不需要检验登录状态的请求路径,
                         //TODO 没有开发完成，需要指定更多
                         "/users/login",
-                        "/users/sign_in"
+                        "/users/sign_in",
+                        "/register/neworder",
+                        "/employee/*",
+                        "/results/neworder",
+                        "/results/entry",
+                        "medicalfacility/*",
+                        "scanners/*"
+
                 );
     }
 }

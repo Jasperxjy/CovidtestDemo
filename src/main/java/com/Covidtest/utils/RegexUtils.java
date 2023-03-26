@@ -28,6 +28,7 @@ public class RegexUtils {
      * @param Timestamp 要校验的时间戳格式
      * @return true: 无效，false：有效
      */
+    //TODO 可能会弃用此方法
     public  static  boolean isTimestampInvalid(String Timestamp){
         return (mismatch(Timestamp,RegexPatterns.TIMESTAMP_REGEX_1)
                 &&mismatch(Timestamp,RegexPatterns.TIMESTAMP_REGEX_2)

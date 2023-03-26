@@ -1,6 +1,9 @@
 package com.Covidtest.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import java.time.LocalDateTime;
+
 
 /**
  * @author 熊
@@ -11,6 +14,7 @@ public class GetOrderDTO {
     //身份证号
     private String id;
     //当前时间
-    private String current_time;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime current_time;
 
 }

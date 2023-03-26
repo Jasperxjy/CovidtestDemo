@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2023-03-13 22:09:44
  */
+//TODO 这个数据库可能会由于业务实现逻辑进行大量的调整
 @SuppressWarnings("serial")
 public class Scanners extends Model<Scanners> {
     //扫管器唯一ID

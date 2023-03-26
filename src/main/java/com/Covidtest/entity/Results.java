@@ -1,8 +1,12 @@
 package com.Covidtest.entity;
 
-import java.util.Date;
+
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 
 /**
  * 检测结果表(Results)表实体类
@@ -17,7 +21,8 @@ public class Results extends Model<Results> {
     //核酸结果
     private String result;
     //检测时间
-    private Date detecttime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime detecttime;
     //检测单位
     private String detectunit;
 
@@ -38,11 +43,11 @@ public class Results extends Model<Results> {
         this.result = result;
     }
 
-    public Date getDetecttime() {
+    public LocalDateTime getDetecttime() {
         return detecttime;
     }
 
-    public void setDetecttime(Date detecttime) {
+    public void setDetecttime(LocalDateTime detecttime) {
         this.detecttime = detecttime;
     }
 

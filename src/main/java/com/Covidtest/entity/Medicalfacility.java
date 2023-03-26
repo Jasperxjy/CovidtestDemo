@@ -12,18 +12,18 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Medicalfacility extends Model<Medicalfacility> {
     //医疗机构ID
-    private Integer medicalfacilityid;
+    private String medicalfacilityid;
     //医疗机构名称
     private String name;
     //医疗机构密码
     private String password;
 
 
-    public Integer getMedicalfacilityid() {
+    public String getMedicalfacilityid() {
         return medicalfacilityid;
     }
 
-    public void setMedicalfacilityid(Integer medicalfacilityid) {
+    public void setMedicalfacilityid(String medicalfacilityid) {
         this.medicalfacilityid = medicalfacilityid;
     }
 
