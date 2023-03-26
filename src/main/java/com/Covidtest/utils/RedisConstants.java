@@ -16,8 +16,8 @@ public class RedisConstants {
     //刷新缓存中的记录间隔时间为2min
     public static final long CACHE_REFRESH_LIMIT_TIME = 2L;
     //刷新表时间的缓存名
-    public static final String CACHE_REGISTER_REFRESH = "cache:register_refresh";
+    public static final String LIMIT_REGISTER_REFRESH = "limit:register_refresh";
     //刷新结果的缓存名
-    public static final String CACHE_RESULTS_REFRESH = "cache:results_refresh";
+    public static final String LIMIT_RESULTS_REFRESH = "limit:results_refresh";
 
 }

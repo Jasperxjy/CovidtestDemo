@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 @Data
 public class RegisterDTO {
-    private String name;
+
     //身份证
     private String id;
     //核酸单号
@@ -22,11 +22,16 @@ public class RegisterDTO {
     public RegisterDTO(Register register) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.registime = register.getRegistime().format(fmt);
+        this.groupT=register.getGroupT();
+        this.naid=register.getNaid();
+        this.id=register.getId();
+    }
+    public RegisterDTO(){
+        this.id="";
+        this.registime="";
+        this.naid="";
+        this.groupT="";
     }
 
-    @Override
-    public String toString(){
-        return name+"_"+id+"_"+naid+"_"+registime+"_"+groupT;
-    }
 
 }

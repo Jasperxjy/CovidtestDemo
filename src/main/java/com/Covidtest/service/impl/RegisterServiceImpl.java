@@ -35,8 +35,6 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterDao, Register> impl
 
     @Resource(name = "myredistemplete")
     private RedisTemplate<String, Object> stringRedisTemplate;
-    @Resource
-    private ObjectMapper objectMapper;
 
     @Override
     public Result get_14d_Orders(GetOrderDTO getOrderDTO, HttpSession session) {
@@ -53,32 +51,23 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterDao, Register> impl
         //刷新缓存持续时间
         stringRedisTemplate.expire(CACHE_REGISTER + id ,CACHE_ORDERS_LIMIT_TIME , TimeUnit.DAYS);
         //存在，返回json
-        String ordersJson;
-        //将map转换为json
-        try {
-            ordersJson=objectMapper.writeValueAsString(ordersMap);
-        }catch (JsonProcessingException jsonProcessingException){
-            return Result.fail("转换map为json时出现异常");
-        }
-        //返回结果
-        return Result.ok(ordersJson);
+        return Result.ok(ordersMap.toString());
     }
 
     @Override
     public Result refresh(GetOrderDTO getOrderDTO, HttpSession session){
-        //TODO 从数据库中查询，并添加到缓存中，返回查询结果
+        // 从数据库中查询，并添加到缓存中，返回查询结果
         //取出身份证和时间信息
         String id = getOrderDTO.getId();
         LocalDateTime current = getOrderDTO.getCurrent_time();
-
-//        //查询刷新缓存间隔时间是否满足
-//        Object temp = stringRedisTemplate.opsForValue().get(CACHE_REGISTER_REFRESH+id);
-//        if(temp.equals(null)){
-//            return Result.fail("刷新过于频繁，请稍后重试");
-//        }
-//        //检查完毕，立刻加锁增加间隔时间
-//        stringRedisTemplate.opsForValue().set(CACHE_REGISTER_REFRESH+id,"wait",CACHE_REFRESH_LIMIT_TIME);
-
+        //查询刷新缓存间隔时间是否满足
+        Map<Object, Object> temp = stringRedisTemplate.opsForHash().entries(LIMIT_REGISTER_REFRESH+id);
+        if(temp.get("1")!=null){
+            return Result.fail("刷新过于频繁，请稍后重试");
+        }
+        //检查完毕，立刻加锁增加间隔时间
+        stringRedisTemplate.opsForHash().put(LIMIT_REGISTER_REFRESH+id, "1","wait");
+        stringRedisTemplate.expire(LIMIT_REGISTER_REFRESH+id ,CACHE_REFRESH_LIMIT_TIME , TimeUnit.MINUTES);
         //读取数据库中id符合且14天内的记录
         //新建一个当前时间14天前的时间
         LocalDateTime startDate = current.plusDays(-14);
@@ -92,12 +81,10 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterDao, Register> impl
         if(orderList.isEmpty()){
             return  Result.fail("查询记录为空");
         }
-
         //将list转换成仅有string的DTO
         List<RegisterDTO> orderDTOList = orderList.stream()
                 .map(RegisterDTO::new)
                 .collect(Collectors.toList());
-
         //将列表中的信息，以时间为key存储到ordersmap中，这样可以使用时间模糊访问每一个记录
         // 若有两个记录时间相同（实际上在添加到数据库中时就是不允许的，但为了最大程度减少bug），选取第一个，抛弃第二个
         Map<String,Object> ordersMap = orderDTOList.stream()
@@ -111,16 +98,8 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterDao, Register> impl
         stringRedisTemplate.opsForHash().putAll(CACHE_REGISTER + id , ordersMap);
         //设置缓存持续时间,在常数配置中为7天
         stringRedisTemplate.expire(CACHE_REGISTER + id ,CACHE_ORDERS_LIMIT_TIME , TimeUnit.DAYS);
-
-        //将这个map转化成json的格式并传回前端
-        String ordersJson;
-        try {
-            ordersJson=objectMapper.writeValueAsString(ordersMap);
-        }catch (JsonProcessingException jsonProcessingException){
-            return Result.fail("转换map为json时出现异常");
-        }
         //返回结果
-        return Result.ok(ordersJson);
+        return Result.ok(ordersMap.toString());
     }
 
     @Transactional//这个注解表示开始事务，此后可以使用其它的手动的事务和异常、回滚处理机制
@@ -141,33 +120,8 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterDao, Register> impl
         save(register);
         //从缓存中抽出对象
         Map<Object,Object> ordersMap = stringRedisTemplate.opsForHash().entries(CACHE_REGISTER + id);
-        if(ordersMap.isEmpty()) {
-            //对象为空，执行刷新函数
-            //新建一个当前时间14天前的时间
-            LocalDateTime startDate = time.plusDays(-14);
-            //以列表的形式取出sql中的信息
-            List<Register> orderList = lambdaQuery()
-                    .in(Register::getId,id)
-                    .ge(Register::getRegistime, startDate) // 大于等于起始时间
-                    .le(Register::getRegistime, time)// 小于等于当前时间
-                    .list();
-
-            //将list转换成仅有string的DTO
-            List<RegisterDTO> orderDTOList = orderList.stream()
-                    .map(RegisterDTO::new)
-                    .collect(Collectors.toList());
-
-            //将列表中的信息，以时间为key存储到ordersmap中，这样可以使用时间模糊访问每一个记录
-            // 若有两个记录时间相同（实际上在添加到数据库中时就是不允许的，但为了最大程度减少bug），选取第一个，抛弃第二个
-            ordersMap = orderDTOList.stream()
-                    .collect(
-                            Collectors.toMap(
-                                    RegisterDTO::getRegistime, Function.identity(),(u1, u2) -> u1)
-                    );
-        }else {
-            //有，在对象中添加一条记录
+        //在对象中添加一条记录,不管到底空不空
             ordersMap.put(register.getRegistime().toString(), new RegisterDTO(register));
-        }
         //将map存回redis中
         stringRedisTemplate.opsForHash().putAll(CACHE_REGISTER + id , ordersMap);
         //刷新缓存时间
