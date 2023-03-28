@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>核酸检测系统</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    input[type="text"], input[type="email"], input[type="date"] {
+      margin: 10px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 300px;
+      max-width: 90%;
+    }
+    
+    label {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    
+    button[type="submit"] {
+      margin: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>核酸检测系统</h1>
+  <form>
+    <label for="name">姓名：</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="email">电子邮件：</label>
+    <input type="email" id="email" name="email" required>
+    
+    <label for="date">检测日期：</label>
+    <input type="date" id="date" name="date" required>
+    
+    <button type="submit">提交</button>
+  </form>
+</body>
+</html>
