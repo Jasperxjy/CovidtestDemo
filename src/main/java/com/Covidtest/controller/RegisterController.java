@@ -5,8 +5,6 @@ import com.Covidtest.dto.Result;
 import com.Covidtest.entity.Register;
 import com.Covidtest.service.RegisterService;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Generated;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -28,7 +26,7 @@ public class RegisterController {
      * @param session 前后端会话
      * @return 返回订单组
      */
-    @GetMapping("/getOrder")
+    @GetMapping("/getorder")
     public Result get_14d_Orders(@RequestBody GetOrderDTO getOrderDTO, HttpSession session){
         //TODO 完成查询14天核酸订单的功能
         return registerService.get_14d_Orders(getOrderDTO,session);

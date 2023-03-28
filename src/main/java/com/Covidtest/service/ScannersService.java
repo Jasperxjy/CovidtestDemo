@@ -11,5 +11,11 @@ import com.Covidtest.entity.Scanners;
  */
 public interface ScannersService extends IService<Scanners> {
 
+    public boolean is_assignable(String scannerid);
+
+    public boolean set_assign(String scannerid,String assignedid);
+
+    public boolean clean_assign(String scannerid);
+
 }
 

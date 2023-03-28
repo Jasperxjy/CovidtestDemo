@@ -17,7 +17,21 @@ public class RedisConstants {
     public static final long CACHE_REFRESH_LIMIT_TIME = 2L;
     //刷新表时间的缓存名
     public static final String LIMIT_REGISTER_REFRESH = "limit:register_refresh";
-    //刷新结果的缓存名
-    public static final String LIMIT_RESULTS_REFRESH = "limit:results_refresh";
+
+    //Employee登录
+    public static final String EMPLOYEE_LOGIN_TOKEN="employees：token:";
+    //Employee登录时间，永久
+    public static final long EMPLOYEE_LOGIN_TIME = -1L;
+
+    //Medical登录
+    public static final String MEDICAL_LOGIN_TOKEN="medical:token:";
+    //Medical登陆时间,三十分钟
+    public static final long MEDICAL_LOGIN_TIME=30L;
+
+    //结果表的缓存名
+    public static final String CACHE_RESULTS = "cache:result";
+    //结果表的缓存持续时间为七天
+    public static final long CACHE_RESULT_LIMIT_TIME = 7L;
+
 
 }

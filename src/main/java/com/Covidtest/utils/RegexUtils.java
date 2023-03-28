@@ -23,18 +23,6 @@ public class RegexUtils {
      */
     public static boolean isIDInvalid(String ID){return  mismatch(ID,RegexPatterns.USER_ID_REGEX);}
 
-    /**
-     * 是否是无效的时间戳
-     * @param Timestamp 要校验的时间戳格式
-     * @return true: 无效，false：有效
-     */
-    //TODO 可能会弃用此方法
-    public  static  boolean isTimestampInvalid(String Timestamp){
-        return (mismatch(Timestamp,RegexPatterns.TIMESTAMP_REGEX_1)
-                &&mismatch(Timestamp,RegexPatterns.TIMESTAMP_REGEX_2)
-                &&mismatch(Timestamp,RegexPatterns.TIMESTAMP_REGEX_3));
-    }
-
     // 校验是否不符合正则格式
     private static boolean mismatch(String str, String regex){
         if (StrUtil.isBlank(str)) {

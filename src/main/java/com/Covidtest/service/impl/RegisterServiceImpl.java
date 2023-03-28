@@ -32,6 +32,7 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterDao, Register> impl
     @Resource(name = "myredistemplete")
     private RedisTemplate<String, Object> stringRedisTemplate;
 
+
     @Override
     public Result get_14d_Orders(GetOrderDTO getOrderDTO, HttpSession session) {
         //TODO 实现基础查询操作，直接查询缓存

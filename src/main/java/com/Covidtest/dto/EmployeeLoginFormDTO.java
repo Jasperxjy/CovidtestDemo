@@ -8,4 +8,6 @@ public class EmployeeLoginFormDTO {
     private String employeeid;
     //登录密码
     private String password;
+    //匹配机号
+    private String assignment;
 }
