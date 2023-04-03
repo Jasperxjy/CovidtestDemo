@@ -12,6 +12,7 @@ public class UserDTO {
     * 内部变量从entity复制，需要用到多少以及安全性问题暂时未知
      * 时间3.19 已经经过调整
     */
+    //姓名
     private String username;
     //用户身份证
     private String id;

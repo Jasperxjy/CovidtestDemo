@@ -1,5 +1,6 @@
 package com.Covidtest.service.impl;
 
+import cn.hutool.core.util.BooleanUtil;
 import com.Covidtest.dao.RegisterDao;
 import com.Covidtest.dto.GetOrderDTO;
 import com.Covidtest.dto.Result;
@@ -32,6 +33,16 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterDao, Register> impl
     @Resource(name = "myredistemplete")
     private RedisTemplate<String, Object> stringRedisTemplate;
 
+    private boolean tryLock(String key){
+        //获取锁
+       Boolean flag = stringRedisTemplate.opsForValue().setIfAbsent(key,"1",10,TimeUnit.SECONDS);
+       return BooleanUtil.isTrue(flag);
+    }
+
+    private void unlock(String key){
+        //释放锁
+        stringRedisTemplate.delete(key);
+    }
 
     @Override
     public Result get_14d_Orders(GetOrderDTO getOrderDTO, HttpSession session) {

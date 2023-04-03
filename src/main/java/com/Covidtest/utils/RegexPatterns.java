@@ -41,4 +41,7 @@ public abstract class RegexPatterns {
     public  static final  String TIMESTAMP_REGEX_1 = "\\d{4}_\\d{2}_\\d{2}\\s\\d{2}:\\d{2}:\\d{2}";
     public  static final  String TIMESTAMP_REGEX_2 = "\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}";
     public  static final  String TIMESTAMP_REGEX_3 = "\\d{4}.\\d{2}.\\d{2}\\s\\d{2}:\\d{2}:\\d{2}";
+
+    public static final String GET_ID_SUCCESS_INFO = "^OK:IDis:.*$";
+    public static final String SET_FEATURE_INFO = "^OK:Featureis:.*$";
 }

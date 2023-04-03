@@ -1,13 +1,8 @@
 package com.Covidtest.controller;
 
-import com.Covidtest.dto.Result;
-import com.Covidtest.dto.UserDTO;
-import com.Covidtest.dto.UserLoginFormDTO;
-import com.Covidtest.dto.UserSignFormDTO;
-import com.Covidtest.entity.Users;
+import com.Covidtest.dto.*;
 import com.Covidtest.service.UsersService;
 import com.Covidtest.utils.UserHolder;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -63,5 +58,20 @@ public class UsersController {
         return Result.ok(user);
     }
 
+    /**
+     * 通过前端传入的图片返回用户身份信息
+     * @param getidByFaceDTO 传入的图片，格式为json，编码为base64
+     * @param session 会话
+     * @return 成功即返回用户信息，错误即返回错误信息
+     */
+    @GetMapping("/get_id_byface")
+    public Result get_id_byface(@RequestBody GetidByFaceDTO getidByFaceDTO,HttpSession session){
+        return usersService.get_id_byface(getidByFaceDTO,session);
+    }
+
+    @PostMapping("/set_feature")
+    public Result set_feature(@RequestBody SetFeatureDTO setFeatureDTO,HttpSession session){
+        return usersService.set_feature(setFeatureDTO,session);
+    }
 
 }

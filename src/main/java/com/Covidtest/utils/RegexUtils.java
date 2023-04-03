@@ -23,6 +23,20 @@ public class RegexUtils {
      */
     public static boolean isIDInvalid(String ID){return  mismatch(ID,RegexPatterns.USER_ID_REGEX);}
 
+    /**
+     * 确认python在人脸识别的过程中返回的消息是否成功返回id
+     * @param res 要检测的消息
+     * @return ture：不合法，false；合法
+     */
+    public static boolean isPyResIdInvalid(String res){
+        return  mismatch(res,RegexPatterns.GET_ID_SUCCESS_INFO);
+    }
+    /**
+     * 确认python在特征提取的过程中返回的消息是否为合法
+     * @param res 要检测的消息
+     * @return ture：不合法，false；合法
+     */
+    public static boolean isPyResFeatureInvalid(String res){return  mismatch(res,RegexPatterns.SET_FEATURE_INFO);}
     // 校验是否不符合正则格式
     private static boolean mismatch(String str, String regex){
         if (StrUtil.isBlank(str)) {
