@@ -72,13 +72,17 @@ public class EmployeesServiceImpl extends ServiceImpl<EmployeesDao, Employees> i
         }
         //设置对象已经分配
         employee.setAssignsstatus("occupied");
+        //设置对象分配机器号
+        employee.setAssignment(scannerid);
+        //更新数据库
+        updateById(employee);
         //使用uuid生成token
         String token= UUID.randomUUID().toString();
         //将对象转为map
         Map<String,Object> employeemap = BeanUtil.beanToMap(employee);
         //用uuid为key将map存入redis中
         stringRedisTemplate.opsForHash().putAll(EMPLOYEE_LOGIN_TOKEN+ token , employeemap);
-        //设置有效期,永久
+        //设置有效期,1000h
         stringRedisTemplate.expire(EMPLOYEE_LOGIN_TOKEN + token ,EMPLOYEE_LOGIN_TIME, TimeUnit.HOURS);
         //返回token
         return Result.ok(token);
@@ -117,7 +121,7 @@ public class EmployeesServiceImpl extends ServiceImpl<EmployeesDao, Employees> i
     public Result logout(EmployeeLogoutDTO employeeLogoutDTO) {
 
         //提取用户
-        Employees employee=query().eq("employeeid",employeeLogoutDTO.getEmployeeid()).one();
+        Employees employee = query().eq("employeeid",employeeLogoutDTO.getEmployeeid()).one();
         //不存在，返回错误信息
         if(employee==null){return Result.fail("传入的用户id错误，请重试");}
         //提取用户分配扫管
@@ -129,7 +133,7 @@ public class EmployeesServiceImpl extends ServiceImpl<EmployeesDao, Employees> i
         //向sql存储这个用户的更改
         updateById(employee);
         //将缓存设为过期
-        stringRedisTemplate.expire(EMPLOYEE_LOGIN_TOKEN + employeeLogoutDTO.getToken() ,0, TimeUnit.SECONDS);
+        stringRedisTemplate.expire(EMPLOYEE_LOGIN_TOKEN + employeeLogoutDTO.getToken() ,0L, TimeUnit.SECONDS);
         return Result.ok();
     }
 }

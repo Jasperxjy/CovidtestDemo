@@ -1,5 +1,6 @@
 package com.Covidtest.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Medicalfacility extends Model<Medicalfacility> {
     //医疗机构ID
+    @TableId
     private String medicalfacilityid;
     //医疗机构名称
     private String name;

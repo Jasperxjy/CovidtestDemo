@@ -46,6 +46,4 @@ public class ResultsController {
     public Result set_result(@RequestBody SetReturnResultsDTO setResultsDTO, HttpSession session){
         return resultsService.set_result(setResultsDTO,session);
     }
-
-
 }

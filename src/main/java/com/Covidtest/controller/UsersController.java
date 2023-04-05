@@ -69,6 +69,12 @@ public class UsersController {
         return usersService.get_id_byface(getidByFaceDTO,session);
     }
 
+    /**
+     * 通过前端传入的图片和身份信息设置用户人脸特征向量
+     * @param setFeatureDTO 传入的图片和id，格式为json，编码为base64
+     * @param session 会话
+     * @return 成功返回ok，失败返回错误信息
+     */
     @PostMapping("/set_feature")
     public Result set_feature(@RequestBody SetFeatureDTO setFeatureDTO,HttpSession session){
         return usersService.set_feature(setFeatureDTO,session);

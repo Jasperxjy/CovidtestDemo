@@ -19,7 +19,7 @@ public interface UsersService extends IService<Users> {
 
     Result sign_In(UserSignFormDTO signForm, HttpSession session);
 
-    byte[] get_feature_by_id(String id);
+    Result get_feature_by_id(String id);
 
     Result get_id_byface(GetidByFaceDTO getidByFaceDTO, HttpSession session);
 

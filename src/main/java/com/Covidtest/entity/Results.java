@@ -1,6 +1,7 @@
 package com.Covidtest.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @SuppressWarnings("serial")
 public class Results extends Model<Results> {
     //管号
+    @TableId
     private String groupT;
     //核酸结果
     private String result;

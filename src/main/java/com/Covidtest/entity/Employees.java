@@ -1,5 +1,6 @@
 package com.Covidtest.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Employees extends Model<Employees> {
     //扫脸平台登录账号
+    @TableId
     private String employeeid;
     //登录密码
     private String password;

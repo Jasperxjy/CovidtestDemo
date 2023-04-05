@@ -1,25 +1,25 @@
 package com.Covidtest.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.Covidtest.dto.*;
-import com.Covidtest.utils.RegexPatterns;
-import com.Covidtest.utils.RegexUtils;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.Covidtest.dao.UsersDao;
+import com.Covidtest.dto.*;
 import com.Covidtest.entity.Users;
 import com.Covidtest.service.UsersService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.Covidtest.utils.RegexUtils;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.SneakyThrows;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -142,8 +142,17 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
     }
 
     @Override
-    public byte[] get_feature_by_id(String id) {
-        return query().eq("id",id).one().getFaceinfoReveal();
+    public Result get_feature_by_id(String id) {
+        Users user;
+        user = query().eq("id",id).one();
+        if(user==null){
+            return Result.fail("用户为空");
+        }else{
+            if(user.getFaceinfoReveal()==null){
+                return Result.fail("没有设置面容");
+            }
+        return Result.ok(query().eq("id",id).one().getFaceinfoReveal());
+        }
     }
 
     @SneakyThrows  //将线程运行中的异常转为隐式异常

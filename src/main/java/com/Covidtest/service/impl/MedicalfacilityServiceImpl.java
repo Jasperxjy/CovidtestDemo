@@ -67,7 +67,7 @@ public class MedicalfacilityServiceImpl extends ServiceImpl<MedicalfacilityDao, 
     @Override
     public Result sign_in(Medicalfacility medicalfacility, HttpSession session) {
         //校验是否为空
-        if(medicalfacility.getName()==null||medicalfacility.getMedicalfacilityid()==null||medicalfacility.getPassword()==null) {
+        if(medicalfacility.getName().isEmpty()||medicalfacility.getMedicalfacilityid().isEmpty()||medicalfacility.getPassword().isEmpty()) {
             //为空，返回错误信息
             return Result.fail("注册信息不全，请重新输入");
         }
@@ -91,7 +91,7 @@ public class MedicalfacilityServiceImpl extends ServiceImpl<MedicalfacilityDao, 
     public Result set_info(Medicalfacility medicalfacility, HttpSession session) {
         //TODO 这里实际上有严重的安全问题，没有判断当前登录用户与传入需要更改的用户id是否相同
         //获取id
-        if(medicalfacility.getMedicalfacilityid()==null){
+        if(medicalfacility.getMedicalfacilityid().isEmpty()){
             return Result.fail("信息不全，需要提供id");
         }
         //从数据库中查找对象
@@ -100,12 +100,14 @@ public class MedicalfacilityServiceImpl extends ServiceImpl<MedicalfacilityDao, 
         if (medical==null) {
             //不存在，返回错误信息
            return Result.fail("传入的用户不存在");
+        }else {
+            medical.setMedicalfacilityid(medicalfacility.getMedicalfacilityid());
         }
         //更改这个对象的属性
-        if(medicalfacility.getName()!=null){
+        if(!medicalfacility.getName().isEmpty()){
         medical.setName(medicalfacility.getName());
         }
-        if(medicalfacility.getPassword()!=null){
+        if(!medicalfacility.getPassword().isEmpty()){
             medical.setPassword(medicalfacility.getPassword());
         }
         //update这个对象

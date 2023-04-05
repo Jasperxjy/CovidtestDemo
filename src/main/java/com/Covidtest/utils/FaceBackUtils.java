@@ -1,5 +1,6 @@
 package com.Covidtest.utils;
 
+import com.Covidtest.dto.Result;
 import org.springframework.stereotype.Component;
 import com.Covidtest.dao.UsersDao;
 
@@ -11,8 +12,7 @@ public class FaceBackUtils {
 
     @Resource
     private UsersDao usersDao;
-    public List<String> get_all_ids() {
-
-       return usersDao.selectAllid();
+    public Result get_all_ids() {
+       return Result.ok(usersDao.selectAllid());
     }
 }

@@ -21,7 +21,7 @@ public class RedisConstants {
     //Employee登录
     public static final String EMPLOYEE_LOGIN_TOKEN="employees：token:";
     //Employee登录时间，永久
-    public static final long EMPLOYEE_LOGIN_TIME = -1L;
+    public static final long EMPLOYEE_LOGIN_TIME = 1000L;
 
     //Medical登录
     public static final String MEDICAL_LOGIN_TOKEN="medical:token:";

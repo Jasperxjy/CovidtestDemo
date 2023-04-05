@@ -5,7 +5,7 @@ spring:
     name: Covidtest
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/testnat?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/testnat?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 264979
   redis:

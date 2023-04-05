@@ -28,7 +28,8 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/employee/*",
                         "/results/set",
                         "/results/new",
-                        "/medical/*"
+                        "/medical/*",
+                        "/face_DT/*"
 
                 );
         //添加employee登录拦截器
@@ -41,7 +42,8 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/register/refresh",
                         "/results/get",
                         "/employee/login",
-                        "/employee/sign_in"
+                        "/employee/sign_in",
+                        "/face_DT/*"
                 );
         //添加medical登录拦截器
         registry.addInterceptor(new MedicalLoginInterceptor(stringRedisTemplate))
@@ -54,7 +56,8 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/results/new",
                         "/register/neworder",
                         "/medical/login",
-                        "/medical/sign_in"
+                        "/medical/sign_in",
+                        "/face_DT/*"
                 );
     }
 }

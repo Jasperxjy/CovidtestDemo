@@ -1,5 +1,6 @@
 package com.Covidtest.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Scanners extends Model<Scanners> {
     //扫管器唯一ID
+    @TableId
     private String scannerid;
     //设备分派状态
     private String assignstatus;

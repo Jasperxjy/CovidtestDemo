@@ -15,7 +15,7 @@ public class MedicalfacilityController {
     @Resource
     private MedicalfacilityService medicalfacilityService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result login(@RequestBody MedicalLoginDTO medicalLoginDTO, HttpSession session){
         return  medicalfacilityService.login(medicalLoginDTO,session);
     }

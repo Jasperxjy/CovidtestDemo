@@ -23,7 +23,7 @@ public class ScannersServiceImpl extends ServiceImpl<ScannersDao, Scanners> impl
     @Override
     public boolean is_assignable(String scannerid) {
         //查询设备数据
-        Scanners scanner= query().eq("scannerid",scannerid).one();
+        Scanners scanner = query().eq("scannerid",scannerid).one();
         //检查是否查到
         if(scanner==null) {
             //否，返回false
@@ -73,7 +73,7 @@ public class ScannersServiceImpl extends ServiceImpl<ScannersDao, Scanners> impl
         }
         //设置分配对象为空，设置分配状态为可用
         scanner.setAssignstatus("free");
-        scanner.setScannerid(null);
+        scanner.setAssignedid("");
         //更新数据库
         updateById(scanner);
         //返回true
