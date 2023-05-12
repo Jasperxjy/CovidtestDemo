@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -151,7 +152,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
             if(user.getFaceinfoReveal()==null){
                 return Result.fail("没有设置面容");
             }
-        return Result.ok(query().eq("id",id).one().getFaceinfoReveal());
+            String utf8Data = new String(user.getFaceinfoReveal(), StandardCharsets.UTF_8);
+        return Result.ok(utf8Data);
         }
     }
 
@@ -214,7 +216,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
                 UserDTO userDTO = BeanUtil.copyProperties(users, UserDTO.class);
                 return Result.ok(userDTO);
             }
-            return  Result.fail("位置的异常：python返回的id无法查询到用户");
+            return Result.fail("位置的异常：python返回的id无法查询到用户");
         }else{
             //获取标准错误流
             InputStream stderr = process.getErrorStream();
@@ -282,7 +284,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, Users> implements Us
         //输出符合格式
         if(!RegexUtils.isPyResFeatureInvalid(outputData)){
             //获取字串作为向量
-            String feature = outputData.substring(FACE_FEATURE_PYPATH.length());
+            String feature = outputData.substring(FACE_FEATURE_OK_HEAD.length());
             //查看字符串是否为空
             if(!feature.isEmpty()){
                 //不为空，去除杂余部分

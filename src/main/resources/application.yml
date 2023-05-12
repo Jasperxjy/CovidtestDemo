@@ -5,13 +5,17 @@ spring:
     name: Covidtest
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/testnat?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    #docker配置
+    #url: jdbc:mysql://mysql_docker:3306/Covidtest?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:3306/Covidtest?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 264979
   redis:
-    host: 192.168.141.128
+    #docker配置
+    #host: redis_docker
+    host: 127.0.0.1
     port: 6379
-    password: 264979
+    #password: 264979
     timeout: 3000  #连接超时时间 单位毫秒
     lettuce:
       pool:
